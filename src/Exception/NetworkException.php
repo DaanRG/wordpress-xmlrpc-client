@@ -9,13 +9,13 @@ namespace HieuLe\WordpressXmlrpcClient\Exception;
  */
 class NetworkException extends \Exception
 {
-	public function __construct($message, $code)
-	{
-		parent::__construct($message, $code, null);
-	}
-	
-	public function __toString()
-	{
-		return "Network error: {$this->message} (Code: {$this->code})";
-	}
+    public function __construct($message, $code)
+    {
+        parent::__construct($message, $code, null);
+    }
+
+    public function __toString()
+    {
+        return "Network error: {$this->message} (Code: {$this->code})";
+    }
 }
