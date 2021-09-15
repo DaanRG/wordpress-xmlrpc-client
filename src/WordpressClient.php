@@ -35,9 +35,8 @@ class WordpressClient
      * @param string                 $xmlrpcEndPoint The wordpress XML-RPC endpoint (optional)
      * @param string                 $username       The client's username (optional)
      * @param string                 $password       The client's password (optional)
-     * @param                        $logger         deprecated. This variable will not be used since 2.4.0
      */
-    public function __construct($xmlrpcEndPoint = null, $username = null, $password = null, $logger = null)
+    public function __construct($xmlrpcEndPoint = null, $username = null, $password = null)
     {
         $this->setCredentials($xmlrpcEndPoint, $username, $password);
         $this->userAgent = $this->getDefaultUserAgent();
