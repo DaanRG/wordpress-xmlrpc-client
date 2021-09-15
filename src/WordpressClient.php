@@ -70,24 +70,26 @@ class WordpressClient
     /**
      * Set the endpoint, username and password for next requests
      *
-     * @param string $xmlrpcEndPoint The wordpress XML-RPC endpoint
-     * @param string $username       The client's username
-     * @param string $password       The client's password
+     * @param string|null $xmlrpcEndPoint The wordpress XML-RPC endpoint
+     * @param string|null $username       The client's username
+     * @param string|null $password       The client's password
      *
      * @since 2.4.0
      */
     public function setCredentials($xmlrpcEndPoint, $username, $password)
     {
-        // prepend http protocol to the end point if needed
-        $scheme = parse_url($xmlrpcEndPoint, PHP_URL_SCHEME);
-        if (!$scheme) {
-            $xmlrpcEndPoint = "http://{$xmlrpcEndPoint}";
-        }
+        if (!empty($xmlrpcEndPoint)) {
+            // prepend http protocol to the end point if needed
+            $scheme = parse_url($xmlrpcEndPoint, PHP_URL_SCHEME);
+            if (!$scheme) {
+                $xmlrpcEndPoint = "http://{$xmlrpcEndPoint}";
+            }
 
-        // swith to https when working with wordpress.com blogs
-        $host = parse_url($xmlrpcEndPoint, PHP_URL_HOST);
-        if (substr($host, -14) == '.wordpress.com') {
-            $xmlrpcEndPoint = preg_replace('|http://|', 'https://', $xmlrpcEndPoint, 1);
+            // swith to https when working with wordpress.com blogs
+            $host = parse_url($xmlrpcEndPoint, PHP_URL_HOST);
+            if (substr($host, -14) == '.wordpress.com') {
+                $xmlrpcEndPoint = preg_replace('|http://|', 'https://', $xmlrpcEndPoint, 1);
+            }
         }
 
         // save information
@@ -850,7 +852,7 @@ class WordpressClient
      *
      * @param \DateTime $datetime
      *
-     * @return string with the XMLRPC internal type is set to datetime
+     * @return \DateTime|string with the XMLRPC internal type is set to datetime
      */
     public function createXMLRPCDateTime($datetime)
     {
